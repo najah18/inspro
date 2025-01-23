@@ -65,6 +65,7 @@ class SubCategoryController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'description' => 'required',
+            'price' => 'required',
             'photo' => 'image|required',
             'category_id' => 'required',
         ]);
@@ -73,7 +74,8 @@ class SubCategoryController extends Controller
 
         $subCategory->name = $request->name;
         $subCategory->description = $request->description;
-        
+        $subCategory->price = $request->price;
+
         // حفظ الصورة إذا تم تحميلها
         if ($request->hasFile('photo')) {
             $subCategory->photo = $request->file('photo')->store('subcategories', 'public');
@@ -126,6 +128,7 @@ class SubCategoryController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
+            'price' => 'required',
             'photo' => 'image|nullable',
             'category_id' => 'required',
         ]);
@@ -134,6 +137,8 @@ class SubCategoryController extends Controller
     
         $subCategory->name = $request->name;
         $subCategory->description = $request->description;
+        $subCategory->price = $request->price;
+
     
         // تحديث الصورة إذا تم تحميلها
         if ($request->hasFile('photo')) {

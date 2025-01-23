@@ -50,6 +50,7 @@
                         <div class="card-body">
                             <h6 class="card-title pb-2">{{ $subcategory->name }}</h6>
                             <p class="card-text">{{ $subcategory->description }}</p>
+                            <h3 class="card-text">{{ $subcategory->price }} $</h3>
                                 <!-- زر المفضلة -->
 
                                 <button class="btn btn-outline-primary favorite-btn" 

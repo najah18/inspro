@@ -39,7 +39,7 @@
 
         <!-- Category Selection -->
         <div class="form-group mb-3">
-            <label for="category_id">Category:</label>
+            <label for="category_id">service:</label>
             <select class="form-control" id="category_id" name="category_id" required>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" {{ $subcategory->category_id == $category->id ? 'selected' : '' }}>
@@ -48,6 +48,13 @@
                 @endforeach
             </select>
         </div>
+
+        <!-- Price Field -->
+        <div class="form-group mb-3">
+            <label for="price">Price:</label>
+            <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ $subcategory->price }}" required>
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>

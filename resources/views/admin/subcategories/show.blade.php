@@ -2,20 +2,21 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Subcategory Details</h2>
+    <h2 class="text-center mb-4">Package Details</h2>
     <div class="card">
         <div class="card-header">
             <h3>{{ $subcategory->name }}</h3>
         </div>
         <div class="card-body">
             <p><strong>Description:</strong> {{ $subcategory->description }}</p>
-            <p><strong>Category:</strong> {{ $subcategory->category->name ?? 'N/A' }}</p>
+            <p><strong>Service:</strong> {{ $subcategory->category->name ?? 'N/A' }}</p>
             <p><strong>Photo:</strong></p>
             @if ($subcategory->photo)
                 <img src="{{ asset('storage/' . $subcategory->photo) }}" alt="{{ $subcategory->name }}" width="200">
             @else
                 <p>No photo available.</p>
             @endif
+            <p><strong>Price:</strong> {{ $subcategory->price }} $ </p>
         </div>
     </div>
     <a href="{{ route('subcategories.index') }}" class="btn btn-secondary mt-3">Back to List</a>

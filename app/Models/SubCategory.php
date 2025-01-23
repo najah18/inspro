@@ -12,8 +12,17 @@ class SubCategory extends Model
         'name',
         'description',
         'photo',
+        'price',
         'category_id',
     ];
+
+    // تعريف العلاقة بين SubCategory و Transactions
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'subcategory_id');
+    }
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);

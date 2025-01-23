@@ -26,24 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // language
-    
-        Schema::defaultStringLength(191);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         View::share('subscriberCategories', SubscriberCategory::all());

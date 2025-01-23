@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="container text-center">
-<h2>Subcategories</h2>
+<h2>Packages</h2>
 <a href="{{route ('subcategories.create')}}" class="btn btn-primary mb-3"><i class=" mx-2 fas fa-plus"></i>Add New package</a>
     <!-- Dropdown for Categories -->
     <div class="mb-3">
@@ -29,9 +29,11 @@
                 <thead>
                     <tr>
                         <th>Image</th>
-                        <th>Subcategory Name</th>
-                        <th>Category</th>
+                        <th>package Name</th>
+                        <th>service</th>
                         <th>Description</th>
+                        <th>price</th>
+
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -50,6 +52,8 @@
                             <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                 {{ $subcategory->description }}
                             </td>
+                            <td>{{ $subcategory->price }} $</td>
+
                             <td>
                             <a href="{{ route('subcategories.showadmin', $subcategory->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('subcategories.edit', $subcategory->id) }}" class="btn btn-sm btn-info">

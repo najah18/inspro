@@ -5,6 +5,8 @@
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
+
+
       <!-- Nav Item - Dashboard -->
       <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
         <a class="nav-link text-left" href="{{route ('admin.index')}}">
@@ -15,6 +17,12 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+        <a class="nav-link text-left" href="{{url ('/')}}">
+          <i class="fas fa-home"></i>
+          <span>my website</span></a>
+      </li>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item {{ request()->is('admin/categories*') ? 'active' : '' }}">
@@ -55,6 +63,15 @@
         <a class="nav-link text-left" href="{{route('users.index')}}">
         <i class="fas fa-pen-fancy"></i>
           <span>users</span>
+        </a>
+      </li>
+
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item {{ request()->is('admin/transactions*') ? 'active' : '' }}">
+        <a class="nav-link text-left" href="{{route('admin.transactions.index')}}">
+        <i class="fas fa-dollar-sign"></i>
+          <span>transactions</span>
         </a>
       </li>
  

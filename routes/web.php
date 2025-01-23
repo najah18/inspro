@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
-
+use App\Http\Controllers\TransactionController;
+use App\Models\SubCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -115,6 +116,11 @@ Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users
 
 
 
+//accounting
+
+Route::get('/admin/transactions/create', [TransactionController::class, 'create'])->name('admin.transactions.create');
+Route::post('/admin/transactions/store', [TransactionController::class, 'store'])->name('admin.transactions.store');
+Route::get('/admin/transactions', [TransactionController::class, 'index'])->name('admin.transactions.index');
 
 
 
@@ -122,7 +128,6 @@ Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users
 
 
 
-// language
-Route::group(['middleware'=>'lang'] , function(){
 
-});
+
+

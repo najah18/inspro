@@ -2,18 +2,18 @@
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="mb-4">Add New SubCategory</h2>
+    <h2 class="mb-4">Add New Package</h2>
 
     <form action="{{ route('subcategories.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <!-- SubCategory Name -->
         <div class="form-group">
-            <label for="name">SubCategory Name</label>
-            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter subcategory name" required>
+            <label for="name">Package Name</label>
+            <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Package name" required>
             @error('name')
                 <span class="invalid-feedback" role="alert">
-                    <strong>The subcategory name is required and should be valid.</strong>
+                    <strong>The Package name is required and should be valid.</strong>
                 </span>
             @enderror
         </div>
@@ -21,7 +21,7 @@
         <!-- SubCategory Description -->
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" rows="5" placeholder="Enter description (optional)">{{ old('description') }}</textarea>
+            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" rows="5" placeholder="Enter description ">{{ old('description') }}</textarea>
             @error('description')
                 <span class="invalid-feedback" role="alert">
                     <strong>The description should be valid.</strong>
@@ -45,9 +45,9 @@
 
         <!-- Category Dropdown -->
         <div class="form-group">
-            <label for="category_id">Select Category</label>
+            <label for="category_id">Select Service</label>
             <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror" required>
-                <option value="" disabled selected>Select a category</option>
+                <option value="" disabled selected>Select a Service</option>
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                 @endforeach
@@ -58,9 +58,20 @@
                 </span>
             @enderror
         </div>
+            <!-- SubCategory Price -->
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" step="0.01" name="price" id="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter the price" required>
+                @error('price')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>The price is required and should be a valid number.</strong>
+                    </span>
+                @enderror
+            </div>
+
 
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Add SubCategory</button>
+        <button type="submit" class="btn btn-primary">Add Package</button>
     </form>
 </div>
 

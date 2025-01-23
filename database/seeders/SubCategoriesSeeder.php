@@ -23,6 +23,7 @@ class SubCategoriesSeeder extends Seeder
                 'id' => 1 ,
                 'name' => 'Apps',
                 'description' => 'Latest news about apps. Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.Latest news about apps.',
+                'price'=> 50.5,
                 'category_id' => '1',
             ],
             [
@@ -30,6 +31,7 @@ class SubCategoriesSeeder extends Seeder
                 'id' => 3 ,
                 'name' => 'Devices',
                 'description' => 'Reviews of the latest devices.',
+                'price'=> 100,
                 'category_id' => '3',
             ],
         ];
