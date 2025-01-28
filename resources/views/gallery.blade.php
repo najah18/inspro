@@ -36,6 +36,41 @@ h6::after {
 
 
 
+
+/* featured */
+/* تنسيق الأزرار */
+.btn-light {
+    background-color: #f8f9fa; /* لون رمادي فاتح */
+    border: 1px solid #ddd; /* إضافة حدود */
+    z-index: 100; /* التأكد من ظهور الأزرار فوق المحتوى */
+    opacity: 0.8; /* شفافية */
+}
+
+.btn-light:hover {
+    opacity: 1; /* إزالة الشفافية عند التمرير */
+}
+
+/* تنسيق البطاقات */
+#card-container {
+    scroll-behavior: smooth; /* تمرير سلس */
+    overflow-x: hidden; /* إخفاء التمرير الأفقي */
+    display: flex;
+    gap: 20px; /* إضافة مسافة بين البطاقات */
+    padding: 0 20px; /* إضافة padding لتجنب قطع البطاقات */
+}
+
+.card-wrapper {
+    box-sizing: border-box; /* تضمين الـ padding والـ border في العرض */
+}
+
+.image-container {
+    text-align: center; /* توسيط الصورة */
+}
+
+/* تنسيق العنوان */
+.text-center {
+    text-align: center; /* توسيط النص أفقيًا */
+}
 </style>
 
 
@@ -63,7 +98,7 @@ h6::after {
             </div>
             <div class="col-md-4 col-lg-5 col-xl-6" >
                 <img src="{{ url('images/bg.png') }}" alt="" class="header-image" style="width: 100%; height: auto;"  data-aos="fade-left" 
-                        data-aos-delay="3000"   data-aos-duration="3000">
+                        data-aos-delay="2000"   data-aos-duration="3000">
             </div>
         </div>
     </div>
@@ -73,37 +108,120 @@ h6::after {
 
 
 <!-- our servises -->
- <section>
-<div class="container ourteam">
-    <div class="text-center position-relative" style="  margin-bottom: 3.5rem !important;">
-    <h2 class="pb-2"> our services</h2>
-    </div>
-    @foreach ($categories as $index => $category)
-        <div class="row mb-3 {{ $index % 2 == 0 ? 'text-right' : 'text-left' }}" data-aos="flip-left">
-            <div class="card mb-3 border-0" style="max-width: 600px; margin-right: {{ $index % 2 == 0 ? '0' : 'auto' }}; margin-left: {{ $index % 2 == 0 ? 'auto' : '0' }}">
-                <div class="row no-gutters">
-                    <!-- ترتيب الأعمدة بناءً على المحاذاة وزيادة عرض الـ div -->
-                    <div class="col-md-2 order-md-{{ $index % 2 == 0 ? '1' : '2' }} d-flex justify-content-center align-items-center p-0">
-                        <!-- إضافة فئة rounded لجعل الصورة مربعة مع حواف دائرية قليلاً -->
-                        <img src="{{asset('storage/' . $category->photo)}}" class="card-img img-fluid " alt="..." style="width: 100%; max-width: 100px; height: auto;"  />
-                    </div>
-                    <div class="col-md-10 order-md-{{ $index % 2 == 0 ? '2' : '1' }}">
-                        <div class="card-body">
-                            <h6 class="card-title pb-2">{{ $category->name }}</h6>
-                            <p class="card-text truncate">{{ $category->description }}</p>
-                            <a class="" href="{{ route('subcategories.index1', $category->id) }}">
-                              <button class="btn-register mt-1">see more</button>
-                            </a>
+<!-- our services -->
+<section>
+    <div class="container ourteam">
+        <div class="text-center position-relative" style="margin-bottom: 3.5rem !important;">
+            <h2 class="pb-2">Our Services</h2>
+        </div>
+        @foreach ($categories as $index => $category)
+            <div class="row mb-3 {{ $index % 2 == 0 ? 'text-right' : 'text-left' }}" data-aos="flip-left">
+                <div class="card mb-3 border-0" style="max-width: 600px; margin-right: {{ $index % 2 == 0 ? '0' : 'auto' }}; margin-left: {{ $index % 2 == 0 ? 'auto' : '0' }}">
+                    <div class="row no-gutters">
+                        <!-- ترتيب الأعمدة بناءً على المحاذاة وزيادة عرض الـ div -->
+                        <div class="col-md-2 order-md-{{ $index % 2 == 0 ? '1' : '2' }} d-flex justify-content-center align-items-center p-0">
+                            <!-- إضافة فئة rounded لجعل الصورة مربعة مع حواف دائرية قليلاً -->
+                            <img src="{{ asset('storage/' . $category->photo) }}" class="card-img img-fluid" alt="..." style="width: 100%; max-width: 100px; height: auto;" />
+                        </div>
+                        <div class="col-md-10 order-md-{{ $index % 2 == 0 ? '2' : '1' }}">
+                            <div class="card-body">
+                                <h6 class="card-title pb-2">{{ $category->name }}</h6>
+                                <p class="card-text truncate">{{ $category->description }}</p>
+                                <a class="" href="{{ route('subcategories.index1', $category->id) }}">
+                                    <button class="btn-register mt-1">See More</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-  
-    @endforeach
-</div>
+        @endforeach
+    </div>
 </section>
+
 <!-- end our servises -->
+
+<!-- featured services -->
+<section class="w-100 mt-4 mb-4">
+    <div class="container position-relative">
+        <!-- عنوان القسم -->
+        <div class="text-center mb-4 ">
+            <h2 class="pb-2 mb-4">Special Package</h2>
+        </div>
+
+        <!-- زر التمرير لليسار -->
+        <button class="btn btn-light position-absolute start-0 top-50 translate-middle-y" style="z-index: 10;" onclick="scrollCards(-1)">
+            &lt;
+        </button>
+
+        <!-- الصور في صف واحد مع التمرير -->
+        <div class="row flex-nowrap overflow-hidden" id="card-container" style="scroll-behavior: smooth;">
+            @foreach($services as $service)
+            <div class="col-lg-3 col-md-4 col-6 mb-4 card-item">
+                <div class="image-container" style="max-width: 80%; margin: 0 auto;">
+                    <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="img-fluid rounded-4" style="width: 100%; height: auto;         border: 2px solid black ;">
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <!-- زر التمرير لليمين -->
+        <button class="btn btn-light position-absolute end-0 top-50 translate-middle-y" style="z-index: 10;" onclick="scrollCards(1)">
+            &gt;
+        </button>
+    </div>
+</section>
+
+<style>
+    /* تأكد من أن الصور في صف واحد فقط */
+    #card-container {
+        display: flex;
+        gap: 16px; /* زيادة المسافة بين الصور */
+        overflow-x: auto;
+    }
+
+    /* الشاشات الكبيرة */
+    @media (min-width: 1200px) {
+        .card-item {
+            flex: 0 0 calc(100% / 4); /* عرض 4 صور في الشاشات الكبيرة */
+        }
+    }
+
+    /* الشاشات المتوسطة */
+    @media (max-width: 1199px) and (min-width: 768px) {
+        .card-item {
+            flex: 0 0 calc(100% / 3); /* عرض 3 صور في الشاشات المتوسطة */
+        }
+    }
+
+    /* الشاشات الصغيرة */
+    @media (max-width: 767px) and (min-width: 576px) {
+        .card-item {
+            flex: 0 0 calc(100% / 2); /* عرض 2 صور في الشاشات الصغيرة */
+        }
+    }
+
+    /* الهواتف الصغيرة */
+    @media (max-width: 575px) {
+        .card-item {
+            flex: 0 0 100%; /* عرض صورة واحدة في الشاشات الصغيرة جداً */
+        }
+    }
+</style>
+
+<script>
+    function scrollCards(direction) {
+        const container = document.getElementById('card-container');
+        const cardWidth = container.firstElementChild.offsetWidth + 16; // عرض العنصر الواحد مع المسافة بين الصور
+        container.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+    }
+</script>
+
+
+
+
+<!-- end featured services -->
+
 <!-- our team -->
  <section class="mb-4 " id="ourteam">
  <div class="container" data-aos="fade-up" >
@@ -341,6 +459,9 @@ document.addEventListener('DOMContentLoaded', () => {
   );
   observer.observe(statisticsSection);
 });
+
+
+
 
 
 </script>

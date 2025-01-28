@@ -10,7 +10,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\InvoiceCategoryController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WorkerController;
+use App\Http\Controllers\WorkerPaymentController;
+use App\Http\Controllers\FeaturedServiceController;
+
+
 use App\Models\SubCategory;
 
 /*
@@ -125,9 +132,44 @@ Route::get('/admin/transactions', [TransactionController::class, 'index'])->name
 
 
 
+// workers
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('workers', WorkerController::class);
+});
+
+
+// payments
+
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+    Route::get('workers/{workerId}/payments', [WorkerController::class, 'showPayments'])->name('workers.payments');
+    Route::get('workers/{workerId}/payments/add', [WorkerController::class, 'addPaymentForm'])->name('workers.payments.add');
+    Route::post('workers/{workerId}/payments', [WorkerController::class, 'storePayment'])->name('workers.payments.store');
+});
+
+
+// Route لعرض جميع المدفوعات
+Route::get('/admin/payments', [WorkerPaymentController::class, 'index'])->name('admin.payments.index');
+// filter by date
+Route::post('/admin/payments/filter', [WorkerPaymentController::class, 'filterByDate'])->name('admin.payments.filter');
 
 
 
 
 
+//  invoice category 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('invoicecategories', InvoiceCategoryController::class);
+});
 
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('invoices', InvoiceController::class);
+});
+
+
+// featured
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('featured', FeaturedServiceController::class);
+});

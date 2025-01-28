@@ -40,6 +40,14 @@
         </a>
       </li>
 
+                <!-- Nav Item - Featured Services -->
+                <li class="nav-item {{ request()->is('admin/featured*') ? 'active' : '' }}">
+                <a class="nav-link text-left" href="{{ route('admin.featured.index') }}">
+                    <i class="fas fa-star"></i> <!-- تم تغيير الأيقونة هنا -->
+                    <span>speacial </span>
+                </a>
+            </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item {{ request()->is('admin/employees*') ? 'active' : '' }}">
         <a class="nav-link text-left" href="{{route ('employees.index')}}">
@@ -69,12 +77,38 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ request()->is('admin/transactions*') ? 'active' : '' }}">
-        <a class="nav-link text-left" href="{{route('admin.transactions.index')}}">
-        <i class="fas fa-dollar-sign"></i>
-          <span>transactions</span>
-        </a>
-      </li>
- 
+              <a class="nav-link text-left" href="{{route('admin.transactions.index')}}">
+              <i class="fas fa-dollar-sign"></i>
+                <span>transactions</span>
+              </a>
+            </li>
+      
+          <!-- Nav Item - Workers -->
+          <li class="nav-item {{ request()->is('admin/workers*') ? 'active' : '' }}">
+              <a class="nav-link text-left" href="{{ route('admin.workers.index') }}">
+                  <i class="fas fa-users"></i>
+                  <span>Workers</span>
+              </a>
+          </li>
+
+          <!-- Nav Item - Invoice Categories -->
+          <li class="nav-item {{ request()->is('admin/invoicecategories*') ? 'active' : '' }}">
+              <a class="nav-link text-left" href="{{ route('admin.invoicecategories.index') }}">
+                  <i class="fas fa-file-invoice"></i>
+                  <span>Invoice Categories</span>
+              </a>
+          </li>
+
+          <!-- Nav Item - Invoices -->
+          <li class="nav-item {{ request()->is('admin/invoices*') ? 'active' : '' }}">
+              <a class="nav-link text-left" href="{{ route('admin.invoices.index') }}">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                  <span>Invoices</span>
+              </a>
+          </li>
+
+
+
 
 
       <!-- Divider -->

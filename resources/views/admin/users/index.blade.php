@@ -11,7 +11,7 @@ Users Display
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <table id="apartments-table" class="table table-striped table-bordered text-left" width="100%" cellspacing="0">
+        <table id="users-table" class="table table-striped table-bordered text-left" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -75,7 +75,7 @@ Users Display
 <script src="{{ asset('theme/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-        $('#apartments-table').DataTable({
+        $('#users-table').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json" // استخدم الترجمة الإنجليزية
             }
