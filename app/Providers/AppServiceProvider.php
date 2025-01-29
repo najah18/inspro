@@ -28,7 +28,6 @@ class AppServiceProvider extends ServiceProvider
     {
 
 
-        // View::share('subscriberCategories', SubscriberCategory::all());
         View::share('categories', Category::all());
         View::share('employees', Employee::all());
 
@@ -40,12 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 // مشاركة البيانات مع جميع العروض
                 View::share('categories', $categoriesWithSubcategories);
             
-                     // جلب الفئات مع المشتركين المرتبطين بها
-                    $subscriberCategories = SubscriberCategory::with('subscribers')->get();
 
-                    // مشاركة البيانات مع جميع العروض
-                    // View::share('subscriberCategories', $subscriberCategories);
-                                        
 
             
                      // جلب الفئات مع المشتركين المرتبطين بها
