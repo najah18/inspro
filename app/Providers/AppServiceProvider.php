@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
 
-        View::share('subscriberCategories', SubscriberCategory::all());
+        // View::share('subscriberCategories', SubscriberCategory::all());
         View::share('categories', Category::all());
         View::share('employees', Employee::all());
 
