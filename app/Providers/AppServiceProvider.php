@@ -27,59 +27,39 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
+ // Skip data sharing during console commands
+ if ($this->app->runningInConsole()) {
+    return;
+}
 
-        // View::share('categories', Category::all());
-        // View::share('employees', Employee::all());
+// Share categories with subcategories if table exists
+if (Schema::hasTable((new Category)->getTable())) {
+    $categoriesWithSubcategories = Category::with('subcategories')->get();
+    View::share('categories', $categoriesWithSubcategories);
+}
 
+// Share employees if table exists
+if (Schema::hasTable((new Employee)->getTable())) {
+    View::share('employees', Employee::all());
+}
 
+// Share subscriber categories with subscribers if table exists
+if (Schema::hasTable((new SubscriberCategory)->getTable())) {
+    $subscriberCategories = SubscriberCategory::with('subscribers')->get();
+    View::share('subscriberCategories', $subscriberCategories);
+}
 
-        //         // جلب الـ categories مع الـ subcategories المرتبطة بها
-        //         $categoriesWithSubcategories = Category::with('subcategories')->get();
+// Share post categories with posts if table exists
+if (Schema::hasTable((new PostCategory)->getTable())) {
+    $postCategories = PostCategory::with('posts')->get();
+    View::share('postCategories', $postCategories);
+}
 
-        //         // مشاركة البيانات مع جميع العروض
-        //         View::share('categories', $categoriesWithSubcategories);
-            
-
-
-            
-        //              // جلب الفئات مع المشتركين المرتبطين بها
-        //              $postCategories = PostCategory::with('posts')->get();
-
-        //              // مشاركة البيانات مع جميع العروض
-        //              View::share('postCategories', $postCategories);
-                     
-
-        //             $information = Information::first(); 
-        //             View::share('information', $information);
-
-        
-           // Skip data sharing if running in the console (CLI)
-    if ($this->app->runningInConsole()) {
-        return;
-    }
-
-    // Share categories with subcategories if the table exists
-    if (Schema::hasTable((new Category)->getTable())) {
-        $categoriesWithSubcategories = Category::with('subcategories')->get();
-        View::share('categories', $categoriesWithSubcategories);
-    }
-
-    // Share employees if the table exists
-    if (Schema::hasTable((new Employee)->getTable())) {
-        View::share('employees', Employee::all());
-    }
-
-    // Share post categories with posts if the table exists
-    if (Schema::hasTable((new PostCategory)->getTable())) {
-        $postCategories = PostCategory::with('posts')->get();
-        View::share('postCategories', $postCategories);
-    }
-
-    // Share information if the table exists
-    if (Schema::hasTable((new Information)->getTable())) {
-        $information = Information::first();
-        View::share('information', $information);
-    }
+// Share information if table exists
+if (Schema::hasTable((new Information)->getTable())) {
+    $information = Information::first(); 
+    View::share('information', $information);
+}
 
     }
 
