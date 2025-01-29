@@ -109,6 +109,7 @@ h6::after {
 
 <!-- our servises -->
 <!-- our services -->
+@if($categories->isNotEmpty())
 <section>
     <div class="container ourteam">
         <div class="text-center position-relative" style="margin-bottom: 3.5rem !important;">
@@ -138,10 +139,12 @@ h6::after {
         @endforeach
     </div>
 </section>
+@endif
 
 <!-- end our servises -->
 
 <!-- featured services -->
+@if(isset($services) && $services->count() > 0)
 <section class="w-100 mt-4 mb-4">
     <div class="container position-relative">
         <!-- عنوان القسم -->
@@ -158,9 +161,18 @@ h6::after {
         <div class="row flex-nowrap overflow-hidden" id="card-container" style="scroll-behavior: smooth;">
             @foreach($services as $service)
             <div class="col-lg-3 col-md-4 col-6 mb-4 card-item">
-                <div class="image-container" style="max-width: 80%; margin: 0 auto;">
-                    <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" class="img-fluid rounded-4" style="width: 100%; height: auto;         border: 2px solid black ;">
-                </div>
+            <div class="image-container" style="max-width: 80%; margin: 0 auto;">
+    <img src="{{ asset('storage/' . $service->image) }}" 
+         alt="{{ $service->name }}" 
+         class="img-fluid rounded-4" 
+         style="
+             width: 100%; 
+             height: auto; 
+             
+             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* ظل ثلاثي الأبعاد */
+         ">
+</div>
+
             </div>
             @endforeach
         </div>
@@ -171,6 +183,7 @@ h6::after {
         </button>
     </div>
 </section>
+@endif
 
 <style>
     /* تأكد من أن الصور في صف واحد فقط */

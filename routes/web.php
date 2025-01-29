@@ -16,8 +16,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\WorkerPaymentController;
 use App\Http\Controllers\FeaturedServiceController;
-
-
+use App\Http\Controllers\SectionController;
 use App\Models\SubCategory;
 
 /*
@@ -125,9 +124,9 @@ Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users
 
 //accounting
 
-Route::get('/admin/transactions/create', [TransactionController::class, 'create'])->name('admin.transactions.create');
-Route::post('/admin/transactions/store', [TransactionController::class, 'store'])->name('admin.transactions.store');
-Route::get('/admin/transactions', [TransactionController::class, 'index'])->name('admin.transactions.index');
+Route::get('/admin/transactions/create', [TransactionController::class, 'create'])->name('admin.transactions.create')->middleware('can:update-info');
+Route::post('/admin/transactions/store', [TransactionController::class, 'store'])->name('admin.transactions.store')->middleware('can:update-info');
+Route::get('/admin/transactions', [TransactionController::class, 'index'])->name('admin.transactions.index')->middleware('can:update-info');
 
 
 
@@ -135,7 +134,7 @@ Route::get('/admin/transactions', [TransactionController::class, 'index'])->name
 // workers
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('workers', WorkerController::class);
-});
+})->middleware('can:update-info');
 
 
 // payments
@@ -144,13 +143,13 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('workers/{workerId}/payments', [WorkerController::class, 'showPayments'])->name('workers.payments');
     Route::get('workers/{workerId}/payments/add', [WorkerController::class, 'addPaymentForm'])->name('workers.payments.add');
     Route::post('workers/{workerId}/payments', [WorkerController::class, 'storePayment'])->name('workers.payments.store');
-});
+})->middleware('can:update-info');
 
 
 // Route لعرض جميع المدفوعات
-Route::get('/admin/payments', [WorkerPaymentController::class, 'index'])->name('admin.payments.index');
+Route::get('/admin/payments', [WorkerPaymentController::class, 'index'])->name('admin.payments.index')->middleware('can:update-info');
 // filter by date
-Route::post('/admin/payments/filter', [WorkerPaymentController::class, 'filterByDate'])->name('admin.payments.filter');
+Route::post('/admin/payments/filter', [WorkerPaymentController::class, 'filterByDate'])->name('admin.payments.filter')->middleware('can:update-info');
 
 
 
@@ -159,13 +158,13 @@ Route::post('/admin/payments/filter', [WorkerPaymentController::class, 'filterBy
 //  invoice category 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('invoicecategories', InvoiceCategoryController::class);
-});
+})->middleware('can:update-info');
 
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('invoices', InvoiceController::class);
-});
+})->middleware('can:update-info');
 
 
 // featured
@@ -173,3 +172,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('featured', FeaturedServiceController::class);
 });
+
+
+
