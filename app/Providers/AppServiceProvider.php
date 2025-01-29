@@ -53,6 +53,33 @@ class AppServiceProvider extends ServiceProvider
         //             View::share('information', $information);
 
         
+           // Skip data sharing if running in the console (CLI)
+    if ($this->app->runningInConsole()) {
+        return;
+    }
+
+    // Share categories with subcategories if the table exists
+    if (Schema::hasTable((new Category)->getTable())) {
+        $categoriesWithSubcategories = Category::with('subcategories')->get();
+        View::share('categories', $categoriesWithSubcategories);
+    }
+
+    // Share employees if the table exists
+    if (Schema::hasTable((new Employee)->getTable())) {
+        View::share('employees', Employee::all());
+    }
+
+    // Share post categories with posts if the table exists
+    if (Schema::hasTable((new PostCategory)->getTable())) {
+        $postCategories = PostCategory::with('posts')->get();
+        View::share('postCategories', $postCategories);
+    }
+
+    // Share information if the table exists
+    if (Schema::hasTable((new Information)->getTable())) {
+        $information = Information::first();
+        View::share('information', $information);
+    }
 
     }
 
