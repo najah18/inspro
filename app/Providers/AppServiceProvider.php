@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
                     $subscriberCategories = SubscriberCategory::with('subscribers')->get();
 
                     // مشاركة البيانات مع جميع العروض
-                    View::share('subscriberCategories', $subscriberCategories);
+                    // View::share('subscriberCategories', $subscriberCategories);
                                         
 
             
