@@ -53,6 +53,7 @@ class InvoiceController extends Controller
         'invoice_number' => 'required|unique:invoices',
         'invoice_name' => 'required',
         'invoice_date' => 'required|date',
+        'price'=>'required',
         'file' => 'required|file|mimes:pdf,jpeg,png,jpg,docx', // تأكد من نوع الملف
         'invoice_category_id' => 'required|exists:invoice_categories,id', // تحقق من أن التصنيف موجود
 
@@ -70,6 +71,7 @@ class InvoiceController extends Controller
         'invoice_number' => $request->invoice_number,
         'invoice_name' => $request->invoice_name,
         'invoice_date' => $request->invoice_date,
+        'price' => $request->price,
         'file_path' => $filePath,  // حفظ المسار مباشرة دون إضافة file_path/
         'invoice_category_id' => $request->invoice_category_id,
     ]);
@@ -106,6 +108,7 @@ class InvoiceController extends Controller
         'invoice_number' => 'required|unique:invoices,invoice_number,' . $id,
         'invoice_name' => 'required',
         'invoice_date' => 'required|date',
+        'price'=>'required',
         'file' => 'nullable|file|mimes:pdf,jpeg,png,jpg,docx',
         'invoice_category_id' => 'required|exists:invoice_categories,id', // تأكد من أن الاسم صحيح
     ]);
@@ -117,6 +120,7 @@ class InvoiceController extends Controller
     $invoice->invoice_number = $request->invoice_number;
     $invoice->invoice_name = $request->invoice_name;
     $invoice->invoice_date = $request->invoice_date;
+    $invoice-> price = $request->price;
     $invoice->invoice_category_id = $request->invoice_category_id; // تأكد من أن الاسم صحيح
 
     // تحديث الملف إذا تم تحميل ملف جديد

@@ -14,6 +14,7 @@ class Invoice extends Model
         'invoice_name',
         'invoice_date',
         'file_path',
+        'price',
         'invoice_category_id',
     ];
 

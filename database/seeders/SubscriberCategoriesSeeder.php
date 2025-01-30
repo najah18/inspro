@@ -10,16 +10,6 @@ class SubscriberCategoriesSeeder extends Seeder
      */
     public function run()
     {
-        $categories = [
-            ['id' => 1, 'name' => 'Instagram'],
-            ['id' => 2, 'name' => 'YouTube'],
-            ['id' => 3, 'name' => 'TikTok'],
-            ['id' => 4, 'name' => 'Facebook'],
-        ];
 
-        foreach ($categories as $category) {
-            SubscriberCategory::create($category);
-        }
-   
     }
 }

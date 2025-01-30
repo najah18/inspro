@@ -12,24 +12,30 @@
     
     <div class="topbar-divider d-none d-sm-block"></div>
 
-    
-
     <!-- Nav Item - User Information -->
+    @auth <!-- إضافة directive للتحقق من تسجيل الدخول -->
     <li class="nav-item dropdown no-arrow">
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+          {{ auth()->user()->name }} <!-- لن تظهر إلا للمستخدم المسجل -->
+        </span>
       </a>
       <!-- Dropdown - User Information -->
       <div class="dropdown-menu dropdown-menu-left shadow animated--grow-in" style="right:-90px">
         <a class="dropdown-item text-right" href="#" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              تسجيل خروج
+          تسجيل خروج
         </a>
       </div>
     </li>
-
+    @else <!-- حالة المستخدم غير المسجل -->
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('login') }}">
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">تسجيل دخول</span>
+      </a>
+    </li>
+    @endauth
   </ul>
-
 </nav>
 <!-- End of Topbar -->

@@ -49,18 +49,21 @@
                     <th>Invoice Number</th>
                     <th>Invoice Name</th>
                     <th>Invoice Date</th>
+                    <th>Invoice Price</th>
                     <th>Invoice Category</th>
                     <th>Invoice File</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
+                @php $total = 0; @endphp
                 @foreach($invoices as $invoice)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $invoice->invoice_number }}</td>
                     <td>{{ $invoice->invoice_name }}</td>
                     <td>{{ $invoice->invoice_date }}</td>
+                    <td>{{ $invoice->price }}</td>
                     <td>{{ $invoice->invoiceCategory->category_name }}</td>
                     <td>
                         <a href="{{ asset('storage/' . $invoice->file_path) }}" target="_blank">View File</a>
@@ -77,12 +80,19 @@
                         </form>
                     </td>
                 </tr>
+                @php $total += $invoice->price; @endphp
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                    <td><strong>{{ $total }}</strong></td>
+                    <td colspan="3"></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>
-
 
 @endsection
 @section('script')
@@ -93,7 +103,7 @@
     $(document).ready(function() {
         $('#invoices-table').DataTable({
             "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json" // استخدم الترجمة الإنجليزية
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/English.json"
             }
         });
     });
