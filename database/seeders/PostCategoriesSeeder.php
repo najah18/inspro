@@ -9,5 +9,7 @@ use App\Models\PostCategory;
 
 class PostCategoriesSeeder extends Seeder
 {
+    public function run(){
 
+    }
 }

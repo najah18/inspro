@@ -54,7 +54,7 @@
         <!-- Invoice price -->
         <div class="form-group">
             <label for="price">price </label>
-            <input type="number" name="price" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $invoice->price) }}" required>
+            <input type="number" step="0.01" name="price" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price', $invoice->price) }}" required>
             <!-- عرض رسالة الخطأ لـ price -->
             @error('price')
                 <div class="invalid-feedback">{{ $message }}</div>

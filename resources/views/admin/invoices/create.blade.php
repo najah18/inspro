@@ -49,7 +49,7 @@
     
     <div class="form-group">
         <label for="price">Price</label>
-        <input type="number" name="price" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" required>
+        <input type="number" name="price" step="0.01" id="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" required>
         @error('price')
             <span class="text-danger">{{ $message }}</span>
         @enderror
