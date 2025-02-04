@@ -2,37 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- الصفحة الرئيسية -->
     <url>
-        <loc>www.insproproduction.com/</loc>
-        <lastmod>04-02-2025</lastmod>
+        <loc>https://www.insproproduction.com/</loc>
+        <lastmod>2025-02-04</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
-    <!-- الفئات والأقسام الفرعية -->
-    <url>
-        <loc>www.insproproduction.com/categories/{id}/subcategories</loc>
-        <lastmod>04-02-2025</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>www.insproproduction.com/subcategory/{id}</loc>
-        <lastmod>04-02-2025</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
     <!-- المفضلة -->
     <url>
-        <loc>www.insproproduction.com/favorites</loc>
-        <lastmod>04-02-2025</lastmod>
+        <loc>https://www.insproproduction.com/favorites</loc>
+        <lastmod>2025-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
 
     <url>
-        <loc>www.insproproduction.com/subscribers</loc>
-        <lastmod>04-02-2025</lastmod>
+        <loc>https://www.insproproduction.com/subscribers</loc>
+        <lastmod>2025-02-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
