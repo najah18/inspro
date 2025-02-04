@@ -13,19 +13,28 @@
         <!-- Name Field -->
         <div class="form-group mb-3">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Description Field -->
         <div class="form-group mb-3">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="4">{{ old('description') }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description') }}</textarea>
+            @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Photo Field -->
         <div class="form-group mb-3">
             <label for="photo">Photo:</label>
-            <input type="file" class="form-control" id="photo" name="photo" onchange="previewImage(event)">
+            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" onchange="previewImage(event)">
+            @error('photo')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
             <div id="photo-preview-container" class="mt-2" style="display:none;">
                 <img id="photo-preview" src="#" alt="Selected Image" style="width: 150px; height: auto;">
             </div>

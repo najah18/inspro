@@ -14,19 +14,28 @@
         <!-- Name Field -->
         <div class="form-group mb-3">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $category->name }}" required>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $category->name) }}" required>
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Description Field -->
         <div class="form-group mb-3">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="4" required>{{ $category->description }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4" required>{{ old('description', $category->description) }}</textarea>
+            @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Photo Field -->
         <div class="form-group mb-3">
             <label for="photo">Photo:</label>
-            <input type="file" class="form-control" id="photo" name="photo" onchange="previewImage(event)">
+            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" onchange="previewImage(event)">
+            @error('photo')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
 
             @if($category->photo)
                 <div class="mt-2">
