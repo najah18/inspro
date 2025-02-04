@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subscriber extends Model
 {
     use HasFactory;
-    public function subscriberCategory()
+
+    protected $fillable = ['name', 'description', 'photo', 'video', 'subscriber_category_id'];
+
+    public function category()
     {
-        return $this->belongsTo(SubscriberCategory::class ,'subscriber_category_id');
+        return $this->belongsTo(SubscriberCategory::class, 'subscriber_category_id');
     }
 }

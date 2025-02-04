@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubscriberCategory extends Model
 {
-    protected $fillable = ['name'];
 
     use HasFactory;
+    
+    protected $fillable = [
+        'name',
+        'photo'
+    ];
     
     public function subscribers()
     {

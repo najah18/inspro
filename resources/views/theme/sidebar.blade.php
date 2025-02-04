@@ -64,6 +64,26 @@
         </a>
       </li>
 
+                        <!-- Nav Item -subscriber category-->
+       <li class="nav-item {{ request()->is('admin/subscriber-categories*') ? 'active' : '' }}">
+        <a class="nav-link text-left" href="{{ route('admin.subscriber-categories.index') }}">
+        <i class="fas fa-layer-group"></i>
+          <span>subscriber Category</span>
+        </a>
+      </li>
+
+    
+      
+                        <!-- Nav Item -subscriber-->
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item {{ request()->is('admin/subscribers*') ? 'active' : '' }}">
+            <a class="nav-link text-left" href="{{ route('admin.subscribers.index') }}">
+                <i class="fas fa-users"></i> <!-- تغيير الأيقونة لتتناسب مع المشتركين -->
+                <span>Subscribers</span> <!-- تغيير النص -->
+            </a>
+        </li>
+
+
       
 
       <!-- Nav Item - Pages Collapse Menu -->

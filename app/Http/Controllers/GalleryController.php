@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeaturedService;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -18,6 +19,14 @@ class GalleryController extends Controller
 
 
 
+    public function showSubscriber(){
+
+        // جلب المشتركين من قاعدة البيانات
+        $subscribers = Subscriber::all(); 
+
+        // إرجاع الصفحة مع البيانات
+        return view('subscribers.index', compact('subscribers'));
+    }
 
     /**
      * Show the form for creating a new resource.

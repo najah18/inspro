@@ -1,5 +1,11 @@
-/* body */
 
+/* body */
+body {
+  font-family: 'Poppins', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600; /* يمكنك تغييره حسب الحاجة */
+  font-style: normal;
+}
 /* end body */
 
 .underline{

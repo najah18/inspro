@@ -17,6 +17,7 @@ use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\WorkerPaymentController;
 use App\Http\Controllers\FeaturedServiceController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\SubscriberController;
 use App\Models\SubCategory;
 
 /*
@@ -163,3 +164,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 
+
+
+// subscriber category
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('subscriber-categories', SubscriberCategoryController::class);
+});
+
+
+// subscriber
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('subscribers', SubscriberController::class);
+});
+
+// show
+Route::get('/subscribers', [GalleryController::class, 'showSubscriber'])->name('subscribers.index');

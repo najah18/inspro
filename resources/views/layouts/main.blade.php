@@ -10,13 +10,42 @@
     <!-- AOS Stylesheet -->
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+
+<!-- google fonts -->
+ <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
     <title>inspro production</title>
 </head>
 <body>
 
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600; /* يمكنك تغييره حسب الحاجة */
+  font-style: normal;
+}
 
+/* nav  */
+
+
+
+
+
+/* nav bar style  */
+
+
+/* end nav style */
+
+</style>
 
 <div class="container-fluid">
   <!-- navbar -->
@@ -32,16 +61,16 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ms-auto"> <!-- ms-auto لتحريك العناصر لليمين -->
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url('/') }}">   <i class="fas fa-home mx-1"></i> Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ url('/') }}">  Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('favorites') }}">   <i class="fa fa-heart mx-1"></i>Favorites</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('favorites') }}"> Favorites</a>
           </li>
           <!--services  -->
           <div class="nav-item">  
             <a class="nav-link" href="#">
-            <span class=""><i class="fa-regular fa-folder-open mx-1"></i>   Services </span>
+            <span class=""> Services </span>
             </a>
             <ul class="dropdown-menu"> 
                   @foreach ($categories as $category)
@@ -58,36 +87,38 @@
           </div>
         <!-- our team -->
           <li class="nav-item">
-            <a class="nav-link" href="#ourteam"> <i class="fas fa-users mx-2"></i>
+            <a class="nav-link" href="#ourteam"> 
             Our team</a>
           </li>
-          <!--  subscriber-->
+          <!-- subscriber -->
           <div class="nav-item">  
-            <a class="nav-link" href="#">
-            <span class="">
-            <i class="fa-regular fa-address-book mx-1"></i>
-            Subscribers
-            </span>
-            </a>
-            <ul class="dropdown-menu">
-            @foreach ($subscriberCategories as $subscriberCategory )
-            <li class="nav-item">
-              <a class="dropdown-item has-submenu" href="#">{{ $subscriberCategory->name }}</a>
-              <ul class=" dropdown-menu">
-                  @foreach ($subscriberCategory->subscribers as $subscriber)
-                       <li><a class="dropdown-item" href="#">{{ $subscriber->name }}</a></li>
-                   @endforeach
+              <a class="nav-link" href="#">
+                  <span>Subscribers</span>
+              </a>
+              <ul class="dropdown-menu">
+                  @foreach ($subscriberCategories as $subscriberCategory)
+                      <li class="nav-item">
+                          <a class="dropdown-item has-submenu" href="#">{{ $subscriberCategory->name }}</a>
+                          <ul class="dropdown-menu">
+                              @foreach ($subscriberCategory->subscribers as $subscriber)
+                                  <li>
+                                      <!-- رابط لصفحة التفاصيل الخاصة بكل مشترك -->
+                                      <a class="dropdown-item" href="{{ route('subscribers.index', $subscriber->id) }}">
+                                          {{ $subscriber->name }}
+                                      </a>
+                                  </li>
+                              @endforeach
+                          </ul>
+                      </li>
+                  @endforeach
               </ul>
-
-            </li>
-            @endforeach
-            </ul>
           </div>
+
           <!-- posts -->
           <div class="nav-item">  
             <a class="nav-link" href="#">
             <span class="">
-            <i class="fa-regular fa-newspaper mx-1"></i>
+            
             Articles
             </span>
             </a>
