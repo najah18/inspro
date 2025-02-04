@@ -54,7 +54,7 @@ class InvoiceController extends Controller
         'invoice_name' => 'required',
         'invoice_date' => 'required|date',
         'price'=>'required',
-        'file' => 'required|file|mimes:pdf,jpeg,png,jpg,docx', // تأكد من نوع الملف
+        'file' => 'required|file', // تأكد من نوع الملف
         'invoice_category_id' => 'required|exists:invoice_categories,id', // تحقق من أن التصنيف موجود
 
         
@@ -109,7 +109,7 @@ class InvoiceController extends Controller
         'invoice_name' => 'required',
         'invoice_date' => 'required|date',
         'price'=>'required',
-        'file' => 'nullable|file|mimes:pdf,jpeg,png,jpg,docx',
+        'file' => 'nullable|file',
         'invoice_category_id' => 'required|exists:invoice_categories,id', // تأكد من أن الاسم صحيح
     ]);
 

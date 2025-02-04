@@ -42,7 +42,66 @@ body {
 
 /* nav bar style  */
 
+.rolling-text {
+    display: inline-block;
+    overflow: hidden;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
 
+.rolling-text:hover .letter,
+.rolling-text.play .letter {
+    transform: translateY(-100%);
+}
+
+.rolling-text .letter {
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1), -webkit-transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+
+.letter:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.letter:nth-child(2) {
+    transition-delay: 0.015s;
+}
+
+.letter:nth-child(3) {
+    transition-delay: 0.03s;
+}
+
+.letter:nth-child(4) {
+    transition-delay: 0.045s;
+}
+
+.letter:nth-child(5) {
+    transition-delay: 0.06s;
+}
+
+.letter:nth-child(6) {
+    transition-delay: 0.075s;
+}
+
+.letter:nth-child(7) {
+    transition-delay: 0.09s;
+}
+
+.letter:nth-child(8) {
+    transition-delay: 0.105s;
+}
+
+.letter:nth-child(9) {
+    transition-delay: 0.12s;
+}
+.letter:nth-child(10) {
+    transition-delay: 0.13s;
+}
+.letter:nth-child(11) {
+    transition-delay: 0.14s;
+}
 /* end nav style */
 
 </style>
@@ -59,18 +118,30 @@ body {
       </button>
       
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto"> <!-- ms-auto لتحريك العناصر لليمين -->
+        <ul class="navbar-nav ms-auto "> <!-- ms-auto لتحريك العناصر لليمين -->
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url('/') }}">  Home</a>
+          <a class="nav-link active" aria-current="page" href="{{ url('/') }}">
+          <div class="container">
+          <span class="rolling-text" data-text="Home"> </span>
+          </div>
+          </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('favorites') }}"> Favorites</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('favorites') }}">
+              <div class="container">
+                <span class="rolling-text" data-text="Favorites"> </span>
+              </div>
+            </a>
           </li>
           <!--services  -->
           <div class="nav-item">  
             <a class="nav-link" href="#">
-            <span class=""> Services </span>
+            <span class=""> 
+              <div class="container">
+                <span class="rolling-text" data-text="Services"> </span>
+              </div>
+            </span>
             </a>
             <ul class="dropdown-menu"> 
                   @foreach ($categories as $category)
@@ -88,12 +159,19 @@ body {
         <!-- our team -->
           <li class="nav-item">
             <a class="nav-link" href="#ourteam"> 
-            Our team</a>
+            <div class="container">
+                <span class="rolling-text" data-text="Our Team"></span>
+            </div>
+            </a>
           </li>
           <!-- subscriber -->
           <div class="nav-item">  
               <a class="nav-link" href="#">
-                  <span>Subscribers</span>
+                  <span>
+                  <div class="container">
+                    <span class="rolling-text" data-text="Subscribers"> </span>
+                  </div>
+                  </span>
               </a>
               <ul class="dropdown-menu">
                   @foreach ($subscriberCategories as $subscriberCategory)
@@ -118,8 +196,9 @@ body {
           <div class="nav-item">  
             <a class="nav-link" href="#">
             <span class="">
-            
-            Articles
+            <div class="container">
+                <span class="rolling-text" data-text="Articles"> </span>
+              </div>
             </span>
             </a>
             <ul class="dropdown-menu">
@@ -306,6 +385,36 @@ AOS.init();
 
 
 </Script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+            // تحديد جميع العناصر التي تحتوي على النص
+            const rollingTexts = document.querySelectorAll(".rolling-text");
+
+            rollingTexts.forEach((rollingText) => {
+                // الحصول على النص من السمة data-text
+                const text = rollingText.getAttribute("data-text");
+
+                // تقسيم النص إلى أحرف
+                const letters = text.split("");
+                const div1 = document.createElement("div");
+                div1.classList.add("block");
+                // إنشاء عناصر لكل حرف وإضافتها إلى DOM
+                letters.forEach((letter, index) => {
+                    const span = document.createElement("span");
+                    span.classList.add("letter");
+                    span.innerText = letter;
+                    div1.appendChild(span);
+                });
+
+                // تكرار النص مرة أخرى لإنشاء التأثير
+                const div2 = div1.cloneNode(true);
+
+                rollingText.appendChild(div1);
+                rollingText.appendChild(div2);
+            });
+        });
+</script>
 @yield('script')
 </body>
 </html>
