@@ -22,9 +22,12 @@
         </div>
     </form>
 
+    <!-- طباعة الفاتورة -->
+    <button class="btn btn-info mb-3" onclick="printInvoice()">Print Invoice</button>
+
     <!-- عرض الجدول المدفوعات -->
     <div class="table-responsive">
-        <table class="table table-striped table-bordered">
+        <table  id="invoiceTable"  class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>#</th>
@@ -62,4 +65,38 @@
 
     <a href="{{ route('admin.workers.index') }}" class="btn btn-secondary mt-3">Back</a>
 </div>
+@endsection
+
+@section('script')
+
+<script>
+    function printInvoice() {
+        var content = document.getElementById('invoiceTable').outerHTML;
+        var logoUrl = "{{ asset('images/logo.png') }}"; // تأكد من وضع مسار اللوغو الصحيح
+        var printWindow = window.open('', '', 'width=900,height=600');
+
+        printWindow.document.write('<html><head><title>Invoice</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write('body {text-align: center; font-family: Arial, sans-serif;}');
+        printWindow.document.write('table {width: 100%; border-collapse: collapse; margin-top: 20px;}');
+        printWindow.document.write('th, td {border: 1px solid black; padding: 8px; text-align: center;}');
+        printWindow.document.write('@media print {button {display: none;}}');
+        printWindow.document.write('</style>');
+        printWindow.document.write('</head><body>');
+
+        // إضافة اللوغو فقط بدون نصوص أخرى
+        printWindow.document.write('<div style="text-align: center; margin-bottom: 20px;">');
+        printWindow.document.write('<img src="' + logoUrl + '" alt="Logo" style="width: 150px; height: auto;">');
+        printWindow.document.write('</div>');
+
+        // طباعة الجدول
+        printWindow.document.write(content);
+        printWindow.document.write('</body></html>');
+
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
+
 @endsection

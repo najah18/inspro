@@ -142,11 +142,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'can:update-info'])-
         Route::post('/payments', [WorkerController::class, 'storePayment'])->name('workers.payments.store');
     });
 
+    
+
     // Payments
     Route::prefix('payments')->group(function () {
         Route::get('/', [WorkerPaymentController::class, 'index'])->name('payments.index');
         Route::post('/filter', [WorkerPaymentController::class, 'filterByDate'])->name('payments.filter');
     });
+
+    Route::get('/admin/payments/edit/{id}', [WorkerPaymentController::class, 'edit'])->name('payments.edit');
+
+    Route::post('/admin/payments/update/{id}', [WorkerPaymentController::class, 'update'])->name('payments.update');
+
 
     // Invoice Categories
     Route::resource('invoicecategories', InvoiceCategoryController::class);

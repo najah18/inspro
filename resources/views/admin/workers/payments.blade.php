@@ -13,6 +13,7 @@
                 <th>Amount</th>
                 <th>Payment Date</th>
                 <th>Notes</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,9 @@
                 <td>{{ $payment->amount }}</td>
                 <td>{{ $payment->payment_date }}</td>
                 <td>{{ $payment->notes }}</td>
+                <td>
+                <a href="{{ route('admin.payments.edit', $payment->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -30,7 +34,6 @@
 
     <!-- زر إضافة معاملة جديدة -->
     <a href="{{ route('admin.workers.payments.add', $worker->id) }}" class="btn btn-success">Add New Payment</a>
-
     <a href="{{ route('admin.workers.index') }}" class="btn btn-secondary mt-3">Back to Workers List</a>
 </div>
 @endsection

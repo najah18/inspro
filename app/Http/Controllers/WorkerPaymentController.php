@@ -61,18 +61,37 @@ class WorkerPaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(WorkerPayment $workerPayment)
+    public function edit($id)
     {
-        //
+        $payment = WorkerPayment::findOrFail($id);
+        return view('admin.payments.edit', compact('payment'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, WorkerPayment $workerPayment)
+    public function update(Request $request, $id)
     {
-        //
+        $payment = WorkerPayment::findOrFail($id);
+        
+        $request->validate([
+            'type' => 'required|string|max:255',
+            'amount' => 'required|numeric|min:0',
+            'payment_date' => 'required|date',
+            'notes' => 'nullable|string',
+        ]);
+    
+        $payment->update([
+            'type' => $request->type,
+            'amount' => $request->amount,
+            'payment_date' => $request->payment_date,
+            'notes' => $request->notes,
+        ]);
+    
+        return redirect()->route('admin.workers.payments', $payment->worker_id)->with('success', 'Payment updated successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
