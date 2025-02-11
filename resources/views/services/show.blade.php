@@ -45,7 +45,6 @@
 
                     <div class="col-md-5 d-flex justify-content-center align-items-center p-2">
                     <picture class="rounded-full">
-                        <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'avif') }}" type="image/avif">
                         <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'webp') }}" type="image/webp">
                         <img src="{{ $subcategory->getFirstMediaUrl('sub_categories') }}" alt="{{ $subcategory->name }}" class="card-img-top" loading="lazy">
                     </picture>

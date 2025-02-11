@@ -14,7 +14,7 @@ class Information extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
-    
+
     protected $fillable = [
         'logo',
         'facebook_link',
@@ -52,8 +52,6 @@ class Information extends Model implements HasMedia
             ->format('webp')
             ->quality(90);
 
-        $this->addMediaConversion('avif')
-            ->format('avif')
-            ->quality(90);
-    }
+      
+    }  
 }

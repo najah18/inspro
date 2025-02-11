@@ -33,8 +33,5 @@ class FeaturedService extends Model implements HasMedia
            ->format('webp')
            ->quality(90);
 
-       $this->addMediaConversion('avif')
-           ->format('avif')
-           ->quality(90);
    }
 }

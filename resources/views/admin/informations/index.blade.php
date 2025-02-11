@@ -40,7 +40,6 @@
                 <tr>
                     <td>
                     <picture class="rounded-full">
-                        <source srcset="{{ $information->getFirstMediaUrl('logos', 'avif') }}" type="image/avif">
                         <source srcset="{{ $information->getFirstMediaUrl('logos', 'webp') }}" type="image/webp">
                         <img src="{{ $information->getFirstMediaUrl('logos') }}" alt="Logo" class="img-fluid" loading="lazy">
                     </picture>

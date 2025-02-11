@@ -29,9 +29,6 @@ class Category extends Model implements HasMedia
              ->quality(90);
 
 
-        $this->addMediaConversion('avif')
-             ->format('avif')
-             ->quality(90);
     }
 
     // علاقة مع النموذج الفرعي SubCategory

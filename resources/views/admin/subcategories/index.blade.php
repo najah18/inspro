@@ -43,7 +43,6 @@
                             <td>
                                 <div  style="width: 60px; height: 60px; object-fit: cover;">
                                 <picture >
-                                    <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'avif') }}" type="image/avif">
                                     <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'webp') }}" type="image/webp">
                                     <img src="{{ $subcategory->getFirstMediaUrl('sub_categories') }}" alt="{{ $subcategory->name }}" class="card-img-top" loading="lazy">
                                 </picture>

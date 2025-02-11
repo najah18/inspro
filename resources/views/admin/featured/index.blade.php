@@ -22,7 +22,6 @@
                     <td>{{ $loop->iteration }}</td>
                     <td style="width: 100px; height: auto;">
                     <picture class="rounded">
-                                <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'avif') }}" type="image/avif">
                                 <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'webp') }}" type="image/webp">
                                 <img src="{{ $service->getFirstMediaUrl('featured_services') }}" alt="{{ $service->name }}" class="img-fluid" loading="lazy">
                             </picture>

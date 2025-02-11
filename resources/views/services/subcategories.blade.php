@@ -43,7 +43,6 @@
                     <div class="col-md-2 order-md-{{ $index % 2 == 0 ? '1' : '2' }} d-flex justify-content-center align-items-center p-0">
                         <!-- إضافة فئة rounded لجعل الصورة مربعة مع حواف دائرية قليلاً -->
                         <picture class=" card-img img-fluid">
-                        <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'avif') }}" type="image/avif" style="width: 100%; max-width: 100px; height: auto;">
                         <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'webp') }}" type="image/webp" style="width: 100%; max-width: 100px; height: auto;">
                         <img src="{{ $subcategory->getFirstMediaUrl('sub_categories') }}" alt="{{ $subcategory->name }}" class="card-img-top" loading="lazy" style="width: 100%; max-width: 100px; height: auto;">
                         </picture>

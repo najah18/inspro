@@ -235,7 +235,6 @@
                     <div class="card shadow-lg rounded-3">
                         <a href="{{ route('subcategories.index1', $category->id) }}">
                             <picture class="rounded-full">
-                                <source srcset="{{ $category->getFirstMediaUrl('conversions', 'avif') }}" type="image/avif">
                                 <source srcset="{{ $category->getFirstMediaUrl('conversions', 'webp') }}" type="image/webp">
                                 <img src="{{ $category->getFirstMediaUrl('categories') }}" alt="{{ $category->name }}" class="card-img-top" loading="lazy">
                             </picture>
@@ -273,7 +272,6 @@
                     <div class="image-container" style="max-width: 80%; margin: 0 auto;">
                         <div style=" width: 100%; height: auto; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); " class="img-fluid rounded-4">
                             <picture class="rounded">
-                                <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'avif') }}" type="image/avif">
                                 <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'webp') }}" type="image/webp">
                                 <img src="{{ $service->getFirstMediaUrl('featured_services') }}" alt="{{ $service->name }}" class="img-fluid rounded-4" loading="lazy" width="200" height="200">
                             </picture>
@@ -311,7 +309,6 @@
                         <div class="col-md-6 col-lg-4 item " data-aos="zoom-in" data-aos-duration="1200">
                             <div class="box">
                                 <picture class="rounded-full">
-                                    <source srcset="{{ $employee->getFirstMediaUrl('employees', 'avif') }}" type="image/avif">
                                     <source srcset="{{ $employee->getFirstMediaUrl('employees', 'webp') }}" type="image/webp">
                                     <img src="{{ $employee->getFirstMediaUrl('employees') }}" alt="{{ $employee->name }}" class="card-img-top" loading="lazy" width="200" height="200">
                                 </picture>

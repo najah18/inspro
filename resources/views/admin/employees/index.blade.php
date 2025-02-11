@@ -25,7 +25,6 @@
                     <td>
                         <div style="width: 100px; height :100px">
                     <picture class="rounded-full">
-                        <source srcset="{{ $employee->getFirstMediaUrl('employees', 'avif') }}" type="image/avif">
                         <source srcset="{{ $employee->getFirstMediaUrl('employees', 'webp') }}" type="image/webp">
                         <img src="{{ $employee->getFirstMediaUrl('employees') }}" alt="{{ $employee->name }}" class="card-img-top" loading="lazy">
                     </picture>
