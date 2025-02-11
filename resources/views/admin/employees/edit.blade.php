@@ -1,12 +1,12 @@
 @extends('theme.default')
 
 @section('heading')
-    Add New Employee
+    Edit Employee
 @endsection
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Add New Employee</h2>
+    <h2 class="text-center mb-4">Edit Employee</h2>
     <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Name Field -->
