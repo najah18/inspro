@@ -95,7 +95,7 @@
 @endsection
 
 @section('script')
-<script>
+<script defer>
     function toggleBio(id) {
         const bioText = document.getElementById('bioText' + id);
         const button = document.querySelector(`button[onclick="toggleBio(${id})"]`);

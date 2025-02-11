@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\FeaturedService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\Models\Media;
+
 
 class FeaturedServiceController extends Controller
 {
@@ -13,6 +14,7 @@ class FeaturedServiceController extends Controller
     public function index()
     {
         $services = FeaturedService::all();
+
         return view('admin.featured.index', compact('services'));
     }
 
@@ -23,71 +25,81 @@ class FeaturedServiceController extends Controller
     }
 
     // حفظ الخدمة الجديدة
+
     public function store(Request $request)
     {
-        // التحقق من صحة البيانات
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:2048',
         ]);
     
-        // رفع الصورة وحفظ المسار
-        $imagePath = $request->file('image')->store('featured-services', 'public');
-    
-        // إنشاء الخدمة
-        FeaturedService::create([
-            'name' => $request->name,
-            'image' => $imagePath,
-            'price' => $request->price,
+        // إنشاء الخدمة في قاعدة البيانات
+        $featuredService = FeaturedService::create([
+            'name' => $validatedData['name'],
+            'price' => $validatedData['price'],
         ]);
     
-        // توجيه إلى صفحة index مع رسالة نجاح
-        return redirect()->route('admin.featured.index')->with('success', 'تمت إضافة الخدمة بنجاح.');
+        // التحقق مما إذا كانت هناك صورة مرفوعة
+        if ($request->hasFile('image')) {
+            $pathToFile = $request->file('image')->getPathname(); // الحصول على المسار الفعلي للصورة
+            $featuredService->addMedia($pathToFile)->toMediaCollection('featured_services'); // إضافة الصورة إلى Media Collection
+        }
+    
+        // إعادة التوجيه مع رسالة نجاح
+        return redirect()->route('admin.featured.index')->with('success', 'Featured service created successfully!');
     }
+    
+    
+    
+    
 
     // عرض نموذج تعديل الخدمة
     public function edit($id)
     {
         $service = FeaturedService::findOrFail($id);
+
         return view('admin.featured.edit', compact('service'));
     }
 
     // تحديث الخدمة
+
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:2048',
         ]);
-
-        $service = FeaturedService::findOrFail($id);
-
-        // إذا تم رفع صورة جديدة
+    
+        // العثور على الخدمة
+        $featuredService = FeaturedService::findOrFail($id);
+        $featuredService->name = $validatedData['name'];
+        $featuredService->price = $validatedData['price'];
+    
+        // التحقق مما إذا كانت هناك صورة جديدة
         if ($request->hasFile('image')) {
-            // حذف الصورة القديمة
-            Storage::disk('public')->delete($service->image);
-            // رفع الصورة الجديدة
-            $imagePath = $request->file('image')->store('featured-services', 'public');
-            $service->image = $imagePath;
+            // حذف الصورة القديمة إذا كانت موجودة
+            if ($featuredService->getFirstMedia('featured_services')) {
+                $featuredService->getFirstMedia('featured_services')->delete();
+            }
+    
+            // إضافة الصورة الجديدة إلى Media Library
+            $pathToFile = $request->file('image')->getPathname(); // الحصول على المسار الفعلي للصورة
+            $featuredService->addMedia($pathToFile)->toMediaCollection('featured_services'); // إضافة الصورة إلى Media Collection
         }
-
-        // تحديث البيانات
-        $service->name = $request->name;
-        $service->price = $request->price;
-        $service->save();
-
-        return redirect()->route('admin.featured.index')->with('success', 'تم تحديث الخدمة بنجاح.');
+    
+        $featuredService->save();
+    
+        return redirect()->route('admin.featured.index')->with('success', 'Featured service updated successfully!');
     }
+    
 
     // حذف الخدمة
     public function destroy($id)
     {
         $service = FeaturedService::findOrFail($id);
 
-        // حذف الصورة من التخزين
-        Storage::disk('public')->delete($service->image);
 
         // حذف الخدمة
         $service->delete();

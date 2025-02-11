@@ -23,11 +23,13 @@
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->description }}</td>
                     <td>
-                        @if ($employee->photo)
-                            <img src="{{ asset('storage/' . $employee->photo) }}" alt="Employee Photo" style="width: 50px; height: auto;">
-                        @else
-                            No photo available
-                        @endif
+                        <div style="width: 100px; height :100px">
+                    <picture class="rounded-full">
+                        <source srcset="{{ $employee->getFirstMediaUrl('employees', 'avif') }}" type="image/avif">
+                        <source srcset="{{ $employee->getFirstMediaUrl('employees', 'webp') }}" type="image/webp">
+                        <img src="{{ $employee->getFirstMediaUrl('employees') }}" alt="{{ $employee->name }}" class="card-img-top" loading="lazy">
+                    </picture>
+                        </div>
                     </td>
                     <td>
                         <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-primary">View</a>

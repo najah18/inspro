@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Employee;
+use App\Models\Income;
 use App\Models\Information;
 use App\Models\PostCategory;
 use App\Models\SubscriberCategory;
@@ -26,6 +27,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
+
+        // incomes
+        if (Schema::hasTable((new Income)->getTable())) {
+
+            $incomes = Income::all();
+            View::share('incomes', $incomes);
+        }
 
  // Skip data sharing during console commands
  if ($this->app->runningInConsole()) {
@@ -61,7 +70,10 @@ if (Schema::hasTable((new Information)->getTable())) {
     View::share('information', $information);
 }
 
-    }
 
+
+
+
+    }
 
 }

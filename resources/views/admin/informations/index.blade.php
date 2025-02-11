@@ -39,11 +39,12 @@
             <tbody>
                 <tr>
                     <td>
-                        @if($information->logo)
-                            <img src="{{ asset('storage/' . $information->logo) }}" alt="Logo" width="100">
-                        @else
-                            No Logo
-                        @endif
+                    <picture class="rounded-full">
+                        <source srcset="{{ $information->getFirstMediaUrl('logos', 'avif') }}" type="image/avif">
+                        <source srcset="{{ $information->getFirstMediaUrl('logos', 'webp') }}" type="image/webp">
+                        <img src="{{ $information->getFirstMediaUrl('logos') }}" alt="Logo" class="img-fluid" loading="lazy">
+                    </picture>
+
                     </td>
                     <td>{{ $information->facebook_link }}</td>
                     <td>{{ $information->instagram_link }}</td>

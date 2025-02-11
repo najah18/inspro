@@ -27,12 +27,9 @@ Show Services
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description ?? 'No description available' }}</td>
-                        <td>
-                            @if($category->photo)
-                                <img src="{{ asset('storage/' . $category->photo) }}" alt="Category Photo" style="width: 50px; height: 50px;">
-                            @else
-                                No photo available
-                            @endif
+                        <td> 
+                            
+                                <img src="{{ $category->getFirstMediaUrl('categories') }}" alt="{{ $category->name }}" loading="lazy"  style="width: 100px; height: 100px; object-fit: cover;" >
                         </td>
                         <td>
                             <a href="{{ route('categories.show', $category->id) }}" class="btn btn-info">View</a>

@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Information extends Model
+class Information extends Model implements HasMedia
 {
     protected $fillable = [
         'logo',
@@ -28,6 +31,26 @@ class Information extends Model
         'contents_nb',
         'photos_nb',
     ];
-    
+
     use HasFactory;
+    use InteractsWithMedia;
+
+    // تحديد المجموعات التي سيُخزن فيها الوسائط
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('logos')
+            ->singleFile(); // لضمان تخزين صورة واحدة فقط
+    }
+
+    // تسجيل التحويلات (مثل تحويلات WebP و AVIF)
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('webp')
+            ->format('webp')
+            ->quality(90);
+
+        $this->addMediaConversion('avif')
+            ->format('avif')
+            ->quality(90);
+    }
 }

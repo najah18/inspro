@@ -41,11 +41,13 @@
                     @foreach ($subcategories as $subcategory)
                         <tr>
                             <td>
-                                @if ($subcategory->photo)
-                                    <img src="{{ asset('storage/' . $subcategory->photo) }}" alt="Subcategory Image" style="width: 60px; height: 60px; object-fit: cover;">
-                                @else
-                                    No Image
-                                @endif
+                                <div  style="width: 60px; height: 60px; object-fit: cover;">
+                                <picture >
+                                    <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'avif') }}" type="image/avif">
+                                    <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'webp') }}" type="image/webp">
+                                    <img src="{{ $subcategory->getFirstMediaUrl('sub_categories') }}" alt="{{ $subcategory->name }}" class="card-img-top" loading="lazy">
+                                </picture>
+                              </div>
                             </td>
                             <td>{{ $subcategory->name }}</td>
                             <td>{{ $subcategory->category->name }}</td>
@@ -72,7 +74,9 @@
                             </td>
                         </tr>
                     @endforeach
+ 
                 </tbody>
+
             </table>
         </div>
     </div>

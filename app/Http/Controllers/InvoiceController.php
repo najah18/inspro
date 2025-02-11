@@ -54,7 +54,7 @@ class InvoiceController extends Controller
         'invoice_name' => 'required',
         'invoice_date' => 'required|date',
         'price'=>'required',
-        'file' => 'required|file', // تأكد من نوع الملف
+        'file' => 'nullable|file', // تأكد من نوع الملف
         'invoice_category_id' => 'required|exists:invoice_categories,id', // تحقق من أن التصنيف موجود
 
         

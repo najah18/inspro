@@ -42,8 +42,14 @@
             <div class="card border-0 col-12 col-md-10 col-lg-8">
                 <div class="row no-gutters">
                     <!-- صورة في العمود الأول -->
+
                     <div class="col-md-5 d-flex justify-content-center align-items-center p-2">
-                        <img src="{{asset ('storage/' . $subcategory->photo)}}" class="img-fluid" style="width: 100%; height: auto;" alt="..." />
+                    <picture class="rounded-full">
+                        <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'avif') }}" type="image/avif">
+                        <source srcset="{{ $subcategory->getFirstMediaUrl('sub_categories', 'webp') }}" type="image/webp">
+                        <img src="{{ $subcategory->getFirstMediaUrl('sub_categories') }}" alt="{{ $subcategory->name }}" class="card-img-top" loading="lazy">
+                    </picture>
+
                     </div>
                     <!-- تفاصيل البطاقة -->
                     <div class="col-md-7">
@@ -73,7 +79,7 @@
 @section('script')
 @section('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<script defer>
 $(document).ready(function(){
     $('.favorite-btn').click(function(){
         let button = $(this); // حفظ الزر الذي تم النقر عليه

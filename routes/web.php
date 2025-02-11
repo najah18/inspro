@@ -16,6 +16,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WorkerController;
 use App\Http\Controllers\WorkerPaymentController;
 use App\Http\Controllers\FeaturedServiceController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubscriberController;
 use App\Models\SubCategory;
@@ -125,12 +126,6 @@ Route::delete('/users/{user}', [UsersController::class, 'destroy'])->name('users
 // Accounting Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'can:update-info'])->group(function () {
     
-    // Transactions
-    Route::prefix('transactions')->group(function () {
-        Route::get('/create', [TransactionController::class, 'create'])->name('transactions.create');
-        Route::post('/store', [TransactionController::class, 'store'])->name('transactions.store');
-        Route::get('/', [TransactionController::class, 'index'])->name('transactions.index');
-    });
 
     // Workers
     Route::resource('workers', WorkerController::class);
@@ -150,9 +145,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'can:update-info'])-
         Route::post('/filter', [WorkerPaymentController::class, 'filterByDate'])->name('payments.filter');
     });
 
-    Route::get('/admin/payments/edit/{id}', [WorkerPaymentController::class, 'edit'])->name('payments.edit');
+    Route::get('/payments/edit/{id}', [WorkerPaymentController::class, 'edit'])->name('payments.edit');
 
-    Route::post('/admin/payments/update/{id}', [WorkerPaymentController::class, 'update'])->name('payments.update');
+    Route::post('/payments/update/{id}', [WorkerPaymentController::class, 'update'])->name('payments.update');
 
 
     // Invoice Categories
@@ -161,7 +156,16 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'can:update-info'])-
     // Invoices
     Route::resource('invoices', InvoiceController::class);
 
+    // income
+
 });
+
+    // Transactions
+    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('transactions', TransactionController::class);
+
+    });
+
 
 // featured
 
@@ -169,6 +173,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('featured', FeaturedServiceController::class);
 });
 
+// incomes
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('incomes', IncomeController::class);
+});
 
 
 

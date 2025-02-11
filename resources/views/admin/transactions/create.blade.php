@@ -33,6 +33,12 @@
                 </select>
             </div>
 
+            <div class="mb-3">
+                <label for="number" class="form-label">
+                    price
+                </label>
+                <input type="number" id="price" name="price" class="form-control" >
+            </div>
             <!-- Date Field -->
             <div class="mb-3">
                 <label for="date" class="form-label">Transaction Date</label>

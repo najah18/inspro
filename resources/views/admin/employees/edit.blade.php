@@ -1,70 +1,65 @@
 @extends('theme.default')
 
 @section('heading')
-    Edit Employee
+    Add New Employee
 @endsection
 
 @section('content')
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Edit Employee</h2>
-    <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
+    <h2 class="text-center mb-4">Add New Employee</h2>
+    <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
 
         <!-- Name Field -->
         <div class="form-group mb-3">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ $employee->name }}" required>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Description Field -->
         <div class="form-group mb-3">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="4">{{ $employee->description }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description') }}</textarea>
+            @error('description')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <!-- Photo Field -->
         <div class="form-group mb-3">
             <label for="photo">Photo:</label>
-            <input type="file" class="form-control" id="photo" name="photo" onchange="previewImage(event)">
-
-            @if($employee->photo)
-                <div class="mt-2">
-                    <label>Current Photo:</label>
-                    <img src="{{ asset('storage/' . $employee->photo) }}" alt="Current Photo" width="100" class="img-fluid" id="current-photo">
-                </div>
-            @else
-                <p>No current photo available.</p>
-            @endif
-
-            <!-- Image preview after upload -->
-            <div id="image-preview" class="mt-2"></div>
+            <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" onchange="previewImage(event)">
+            @error('photo')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+            <div id="photo-preview-container" class="mt-2" style="display:none;">
+                <img id="photo-preview" src="#" alt="Selected Image" style="width: 150px; height: auto;">
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="submit" class="btn btn-primary">Save Employee</button>
     </form>
 </div>
 
-<script>
-    // Function to preview image after upload
-    function previewImage(event) {
-        const file = event.target.files[0];
-        const reader = new FileReader();
+@section('scripts')
+    <script>
+        function previewImage(event) {
+            const previewContainer = document.getElementById('photo-preview-container');
+            const previewImage = document.getElementById('photo-preview');
+            const file = event.target.files[0];
 
-        reader.onload = function () {
-            const imagePreview = document.getElementById('image-preview');
-            imagePreview.innerHTML = `<img src="${reader.result}" width="100" class="img-fluid">`;
-
-            // Hide the current image if a new one is uploaded
-            const currentPhoto = document.getElementById('current-photo');
-            if (currentPhoto) {
-                currentPhoto.style.display = 'none';
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'block'; // Show the preview container
+                };
+                reader.readAsDataURL(file);
             }
-        };
-
-        if (file) {
-            reader.readAsDataURL(file);
         }
-    }
-</script>
+    </script>
+@endsection
 @endsection

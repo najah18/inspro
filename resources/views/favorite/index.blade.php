@@ -14,11 +14,12 @@
         </div>
         <div class="row justify-content-center mb-3" id="favorites-list">
             @forelse($favorites as $favorite)
-            <div class="card border-0 col-12 col-md-10 col-lg-8 mb-3" data-favorite-id="{{ $favorite->id }}">
+            <div class="card border-0 col-12 col-md-6 col-lg-4 mb-3" data-favorite-id="{{ $favorite->id }}">
                 <div class="row no-gutters">
                     <!-- Image in the first column -->
                     <div class="col-md-5 d-flex justify-content-center align-items-center p-2">
-                        <img src="{{ asset('storage/' . $favorite->photo) }}" class="img-fluid" style="width: 100%; height: auto;" alt="..." />
+                    <img src="{{ $favorite->photo_url }}" class="img-fluid" style="width: 100%; height: auto;" alt="..." />
+
                     </div>
                     <!-- Card details -->
                     <div class="col-md-7">
@@ -44,7 +45,7 @@
 
 @section('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<script defer>
 $(document).ready(function(){
     $('.remove-favorite-btn').click(function(){
         let button = $(this); // Keep reference to the button clicked

@@ -60,7 +60,7 @@ class TransactionController extends Controller
     
         Transaction::create([
             'subcategory_id' => $subcategory->id,
-            'price' => $subcategory->price,
+            'price' => $request->price,
             'date' => $request->date,
         ]);
     
@@ -68,5 +68,56 @@ class TransactionController extends Controller
     }
     
 
+
+        public function edit($id)
+        {
+            $transaction = Transaction::findOrFail($id);
+            $subcategories = Subcategory::where('category_id', $transaction->subcategory->category_id)->get(); // جلب التصنيفات الفرعية المرتبطة بالفئة
+        
+            return view('admin.transactions.edit', compact('transaction', 'subcategories')); // تمرير المتغيرات إلى العرض
+        }
+        
+
+    public function update(Request $request, $id)
+    {
+        // ✅ التحقق من صحة البيانات المدخلة
+        $request->validate([
+            'subcategory_id' => 'required|exists:sub_categories,id',
+            'price' => 'required|numeric|min:0',
+            'date' => 'required|date',
+        ]);
+    
+        // ✅ جلب السجل المطلوب
+        $transaction = Transaction::findOrFail($id);
+    
+        // ✅ جلب التصنيف بناءً على التصنيف الفرعي المحدد
+        $subcategory = Subcategory::findOrFail($request->subcategory_id);
+        $categoryName = $subcategory->category->name; // الحصول على اسم التصنيف
+    
+        // ✅ تحديث البيانات
+        $transaction->update([
+            'name' => $categoryName, // ✅ تعيين الاسم بناءً على التصنيف
+            'subcategory_id' => $request->subcategory_id,
+            'price' => $request->price,
+            'date' => $request->date,
+        ]);
+    
+        // ✅ إعادة التوجيه مع رسالة نجاح
+        return redirect()->route('admin.transactions.index')->with('success', 'تم تحديث المعاملة بنجاح!');
+    }
+
+    public function destroy($id)
+{
+    // جلب السجل المطلوب
+    $transaction = Transaction::findOrFail($id);
+
+    // حذف المعاملة
+    $transaction->delete();
+
+    // إعادة التوجيه مع رسالة نجاح
+    return redirect()->route('admin.transactions.index')->with('success', 'تم حذف المعاملة بنجاح!');
+}
+
+    
 
 }

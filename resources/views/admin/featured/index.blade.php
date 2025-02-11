@@ -20,8 +20,12 @@
             @foreach($services as $service)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>
-                        <img src="{{ asset('storage/' . $service->image) }}" alt="{{ $service->name }}" style="width: 100px; height: auto;">
+                    <td style="width: 100px; height: auto;">
+                    <picture class="rounded">
+                                <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'avif') }}" type="image/avif">
+                                <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'webp') }}" type="image/webp">
+                                <img src="{{ $service->getFirstMediaUrl('featured_services') }}" alt="{{ $service->name }}" class="img-fluid" loading="lazy">
+                            </picture>
                     </td>
                     <td>{{ $service->name }}</td>
                     <td>{{ number_format($service->price, 2) }}</td>
