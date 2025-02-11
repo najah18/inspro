@@ -9,11 +9,10 @@
     <h2 class="text-center mb-4">Add New Employee</h2>
     <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
         <!-- Name Field -->
         <div class="form-group mb-3">
             <label for="name">Name:</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{$employee->name}}" required>
             @error('name')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -22,7 +21,7 @@
         <!-- Description Field -->
         <div class="form-group mb-3">
             <label for="description">Description:</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{ old('description') }}</textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4">{{$employee->description}}</textarea>
             @error('description')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
