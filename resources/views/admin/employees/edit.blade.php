@@ -7,7 +7,7 @@
 @section('content')
 <div class="container mt-5">
     <h2 class="text-center mb-4">Edit Employee</h2>
-    <form action="{{ route('employees.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('employees.update' , $employee->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <!-- Name Field -->
         <div class="form-group mb-3">
