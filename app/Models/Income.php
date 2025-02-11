@@ -17,6 +17,6 @@ class Income extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('incomes')
-             ->singleFile(); // إذا كانت الصورة واحدة فقط لكل دخل
+            ->singleFile(); // لضمان تخزين صورة واحدة فقط
     }
 }

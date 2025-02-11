@@ -10,6 +10,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Information extends Model implements HasMedia
 {
+    
+    use HasFactory;
+    use InteractsWithMedia;
+
+    
     protected $fillable = [
         'logo',
         'facebook_link',
@@ -32,8 +37,6 @@ class Information extends Model implements HasMedia
         'photos_nb',
     ];
 
-    use HasFactory;
-    use InteractsWithMedia;
 
     // تحديد المجموعات التي سيُخزن فيها الوسائط
     public function registerMediaCollections(): void
