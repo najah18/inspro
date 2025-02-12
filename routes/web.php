@@ -199,3 +199,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 // show
 Route::get('/subscribers', [GalleryController::class, 'showSubscriber'])->name('subscribers.index');
+
+

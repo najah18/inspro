@@ -66,6 +66,7 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee'));
     }
 
+   
     // تحديث بيانات الموظف
     public function update(Request $request, $id)
     {
