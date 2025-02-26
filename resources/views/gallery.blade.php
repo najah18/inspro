@@ -273,7 +273,7 @@
                         <div style=" width: 100%; height: auto; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); " class="img-fluid rounded-4">
                             <picture class="rounded">
                                 <source srcset="{{ $service->getFirstMediaUrl('featured_services', 'webp') }}" type="image/webp">
-                                <img src="{{ $service->getFirstMediaUrl('featured_services') }}" alt="{{ $service->name }}" class="img-fluid rounded-4" loading="lazy" width="200" height="200">
+                                <img src="{{ $service->getFirstMediaUrl('featured_services') }}" alt="{{ $service->name }}" class="img-fluid rounded-4" loading="lazy" width="200" height="400">
                             </picture>
                         </div>
                     </div>

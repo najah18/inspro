@@ -102,7 +102,6 @@ Route::get('/admin/subcategories/{id}', [SubCategoryController::class, 'showadmi
 
 // employee
 
-
 Route::resource('employees', EmployeeController::class)->middleware('can:update-info');
 
 Route::post('employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update')->middleware('can:update-info');
