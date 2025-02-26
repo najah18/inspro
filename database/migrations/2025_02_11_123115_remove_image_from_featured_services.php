@@ -9,20 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
-    {
-        Schema::table('featured_services', function (Blueprint $table) {
-            $table->dropColumn('image'); // حذف العمود 'image'
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::table('featured_services', function (Blueprint $table) {
+    //         $table->dropColumn('image'); // حذف العمود 'image'
+    //     });
+    // }
     
-    /**
-     * Reverse the migrations.
-     */
-    public function down()
-    {
-        Schema::table('featured_services', function (Blueprint $table) {
-            $table->string('image'); // إعادة إضافة العمود 'image' إذا تم التراجع
-        });
-    }
+    // /**
+    //  * Reverse the migrations.
+    //  */
+    // public function down()
+    // {
+    //     Schema::table('featured_services', function (Blueprint $table) {
+    //         $table->string('image'); // إعادة إضافة العمود 'image' إذا تم التراجع
+    //     });
+    // }
 };
